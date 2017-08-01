@@ -68,7 +68,7 @@
 	    diffusion.addDrop();
 	  });
 	  $hideButton.addEventListener('click', function () {
-	    return diffusion.hideWater();
+	    return diffusion.toggleWater();
 	  });
 	});
 	
@@ -121,6 +121,11 @@
 	    key: "addDrop",
 	    value: function addDrop() {
 	      this.simulation.addDrop();
+	    }
+	  }, {
+	    key: "toggleWater",
+	    value: function toggleWater() {
+	      this.simulation.toggleWater();
 	    }
 	  }]);
 	
@@ -185,6 +190,15 @@
 	      var waterMol = new _water_mol2.default();
 	      this.mols.push(waterMol);
 	      return waterMol;
+	    }
+	  }, {
+	    key: 'toggleWater',
+	    value: function toggleWater() {
+	      this.mols.forEach(function (mol) {
+	        if (mol.constructor.name == 'WaterMol') {
+	          mol.color = mol.color == '#e7fafe' ? '#dae1e2' : '#e7fafe';
+	        }
+	      });
 	    }
 	  }, {
 	    key: 'addDrop',
@@ -263,7 +277,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 5;
+	var VELOCITY = 2;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -532,7 +546,7 @@
 	  return 5;
 	};
 	
-	var VELOCITY = 1;
+	var VELOCITY = 3;
 	
 	var ColorDropMol = function (_Mol) {
 	  _inherits(ColorDropMol, _Mol);
@@ -545,7 +559,7 @@
 	    options.color = '#ae1e1e';
 	    options.radius = RADIUS();
 	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
-	    options.vel = [0, -0.5 * VELOCITY];
+	    options.vel = [0, -1 * VELOCITY];
 	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
 	  }
 	
