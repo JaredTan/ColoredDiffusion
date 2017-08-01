@@ -281,7 +281,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 2;
+	var VELOCITY = 0.5;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -367,20 +367,20 @@
 	  }, {
 	    key: 'move',
 	    value: function move() {
-	      if (this.pos[0] < 0) {
-	        this.pos[0] = 0;
+	      if (this.pos[0] < 5) {
+	        this.pos[0] = 5;
 	        this.vel[0] *= -1;
 	      }
-	      if (this.pos[0] > 500) {
-	        this.pos[0] = 500;
+	      if (this.pos[0] > 495) {
+	        this.pos[0] = 495;
 	        this.vel[0] *= -1;
 	      }
 	      if (this.pos[1] < 0) {
 	        this.pos[1] = 0;
 	        this.vel[1] *= -1;
 	      }
-	      if (this.pos[1] > 500) {
-	        this.pos[1] = 500;
+	      if (this.pos[1] > 495) {
+	        this.pos[1] = 495;
 	        this.vel[1] *= -1;
 	      }
 	      this.pos[0] += this.vel[0];
@@ -560,7 +560,7 @@
 	
 	    _classCallCheck(this, ColorDropMol);
 	
-	    options.color = '#ae1e1e';
+	    options.color = '#b51717';
 	    options.radius = RADIUS();
 	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
 	    options.vel = [0, -1 * VELOCITY];
