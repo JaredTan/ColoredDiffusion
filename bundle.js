@@ -60,11 +60,15 @@
 	  var canvas = document.getElementById('canvas');
 	  var ctx = canvas.getContext('2d');
 	  var $dropButton = document.getElementById('drop-btn');
+	  var $hideButton = document.getElementById('hide-btn');
 	
 	  var diffusion = new _sim_view2.default(new _simulation2.default(), ctx);
 	  diffusion.start();
 	  $dropButton.addEventListener('click', function () {
-	    return diffusion.addDrop();
+	    diffusion.addDrop();
+	  });
+	  $hideButton.addEventListener('click', function () {
+	    return diffusion.hideWater();
 	  });
 	});
 	
@@ -105,7 +109,7 @@
 	      }, Math.floor(1000 / 30));
 	      setInterval(function () {
 	        return _this.simulation.draw(_this.ctx);
-	      }, Math.floor(1000 / 30));
+	      }, Math.floor(1000 / 60));
 	    }
 	  }, {
 	    key: "movement",
@@ -145,6 +149,10 @@
 	
 	var _color_drop2 = _interopRequireDefault(_color_drop);
 	
+	var _color_drop_mol = __webpack_require__(7);
+	
+	var _color_drop_mol2 = _interopRequireDefault(_color_drop_mol);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -153,7 +161,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
+	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 600;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -181,14 +189,9 @@
 	  }, {
 	    key: 'addDrop',
 	    value: function addDrop() {
-	      var _this = this;
-	
-	      var newDrop = new _color_drop2.default();
-	
-	      newDrop.colorDrop.forEach(function (drop) {
-	        return _this.mols.push(drop);
-	      });
-	      console.log(this.mols);
+	      var newDrop = new _color_drop_mol2.default();
+	      this.mols.push(newDrop);
+	      // newDrop.colorDrop.forEach(mol => this.mols.push(mol));
 	    }
 	  }, {
 	    key: 'draw',
@@ -260,7 +263,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 1;
+	var VELOCITY = 5;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -270,7 +273,7 @@
 	
 	    _classCallCheck(this, WaterMol);
 	
-	    options.color = '#D3D3D3';
+	    options.color = '#e7fafe';
 	    options.radius = RADIUS();
 	    options.pos = [Math.floor(Math.random() * 500), Math.floor(Math.random() * 500)];
 	    options.vel = [(Math.random() - 0.5) * VELOCITY, (Math.random() - 0.5) * VELOCITY];
@@ -541,8 +544,8 @@
 	
 	    options.color = '#ae1e1e';
 	    options.radius = RADIUS();
-	    options.pos = [Math.floor(Math.random() * 500), Math.floor(Math.random() * 500)];
-	    options.vel = [(Math.random() - 0.5) * VELOCITY, (Math.random() - 0.5) * VELOCITY];
+	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
+	    options.vel = [0, -0.5 * VELOCITY];
 	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
 	  }
 	
