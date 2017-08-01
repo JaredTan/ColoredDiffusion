@@ -14,6 +14,8 @@
   display: flex;
   align-items: center;
   color: #0015D5;
+  margin-top: -5px;
+  margin-bottom: 10px;
 }
 
 .fa-github {
@@ -24,6 +26,11 @@
   margin-top: 10px;
 }
 
+.color-choice {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
 #canvas {
   background-color: #e7fafe;
   padding-left: 0;

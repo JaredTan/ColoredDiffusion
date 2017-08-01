@@ -560,7 +560,7 @@
 	
 	    _classCallCheck(this, ColorDropMol);
 	
-	    options.color = '#b51717';
+	    options.color = $("#color").val();
 	    options.radius = RADIUS();
 	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
 	    options.vel = [0, -1 * VELOCITY];
