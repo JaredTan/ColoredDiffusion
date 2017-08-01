@@ -59,10 +59,19 @@
 	document.addEventListener("DOMContentLoaded", function () {
 	  var canvas = document.getElementById('canvas');
 	  var ctx = canvas.getContext('2d');
+	  var $dropButton = document.getElementById('drop-btn');
 	
-	  var simulation = new _sim_view2.default(new _simulation2.default(), ctx);
-	  simulation.start();
+	  var diffusion = new _sim_view2.default(new _simulation2.default(), ctx);
+	  diffusion.start();
+	  $dropButton.addEventListener('click', function () {
+	    return diffusion.addDrop();
+	  });
 	});
+	
+	// $(document).ready(() => {
+	//   const $dropButton = document.getElementById('drop-btn');
+	//   $dropButton.addEventListener('click', () => new ColorDrop())
+	// })
 
 /***/ }),
 /* 1 */
@@ -104,6 +113,11 @@
 	      this.simulation.moveObjects();
 	      this.simulation.checkCollisions();
 	    }
+	  }, {
+	    key: "addDrop",
+	    value: function addDrop() {
+	      this.simulation.addDrop();
+	    }
 	  }]);
 	
 	  return SimView;
@@ -127,6 +141,10 @@
 	
 	var _water_mol2 = _interopRequireDefault(_water_mol);
 	
+	var _color_drop = __webpack_require__(6);
+	
+	var _color_drop2 = _interopRequireDefault(_color_drop);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -135,19 +153,19 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 900;
+	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5;
 	
 	    _classCallCheck(this, Sim);
 	
 	    this.DIM_X = DIM_X;
 	    this.DIM_Y = DIM_Y;
-	    this.waterMols = [];
+	    this.mols = [];
 	
-	    while (this.waterMols.length < NUM_MOLECULES) {
-	      var newMol = this.addWater();
-	      for (var i = 0; i < this.waterMols.length - 1; i++) {
-	        if (newMol.isCollidedWith(this.waterMols[i])) {
-	          this.waterMols.pop();
+	    while (this.mols.length < NUM_MOLECULES) {
+	      var newWaterMol = this.addWater();
+	      for (var i = 0; i < this.mols.length - 1; i++) {
+	        if (newWaterMol.isCollidedWith(this.mols[i])) {
+	          this.mols.pop();
 	        }
 	      }
 	    }
@@ -157,32 +175,43 @@
 	    key: 'addWater',
 	    value: function addWater() {
 	      var waterMol = new _water_mol2.default();
-	      this.waterMols.push(waterMol);
-	      waterMol.className = 'ball';
+	      this.mols.push(waterMol);
 	      return waterMol;
+	    }
+	  }, {
+	    key: 'addDrop',
+	    value: function addDrop() {
+	      var _this = this;
+	
+	      var newDrop = new _color_drop2.default();
+	
+	      newDrop.colorDrop.forEach(function (drop) {
+	        return _this.mols.push(drop);
+	      });
+	      console.log(this.mols);
 	    }
 	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
 	      ctx.clearRect(0, 0, 1000, 1000);
-	      this.waterMols.forEach(function (mol) {
+	      this.mols.forEach(function (mol) {
 	        return mol.draw(ctx);
 	      });
 	    }
 	  }, {
 	    key: 'moveObjects',
 	    value: function moveObjects() {
-	      this.waterMols.forEach(function (mol) {
+	      this.mols.forEach(function (mol) {
 	        return mol.move();
 	      });
 	    }
 	  }, {
 	    key: 'checkCollisions',
 	    value: function checkCollisions() {
-	      for (var i = 0; i < this.waterMols.length - 1; i++) {
-	        for (var j = i + 1; j < this.waterMols.length; j++) {
-	          var mol1 = this.waterMols[i];
-	          var mol2 = this.waterMols[j];
+	      for (var i = 0; i < this.mols.length - 1; i++) {
+	        for (var j = i + 1; j < this.mols.length; j++) {
+	          var mol1 = this.mols[i];
+	          var mol2 = this.mols[j];
 	          if (mol1.isCollidedWith(mol2)) {
 	            mol1.separateObjects(mol2);
 	            mol1.handleElasticCollision(mol2);
@@ -380,8 +409,11 @@
 	      var new_yvel_other = magnitude_other * Math.sin(dir_other - col_angle);
 	      var final_xvel_this = _util2.default.elasticCollision(this.radius, other.radius, new_xvel_this, new_xvel_other);
 	      var final_xvel_other = _util2.default.elasticCollision(other.radius, this.radius, new_xvel_other, new_xvel_this);
-	      var final_yvel_this = _util2.default.elasticCollision(this.radius, other.radius, new_yvel_this, new_yvel_other);
-	      var final_yvel_other = _util2.default.elasticCollision(other.radius, this.radius, new_yvel_other, new_yvel_this);
+	      var final_yvel_this = new_yvel_this;
+	      var final_yvel_other = new_yvel_other;
+	
+	      // let final_yvel_this = Util.elasticCollision(this.radius, other.radius, new_yvel_this, new_yvel_other);
+	      // let final_yvel_other = Util.elasticCollision(other.radius, this.radius, new_yvel_other, new_yvel_this);
 	      this.vel[0] = Math.cos(col_angle) * final_xvel_this + Math.cos(col_angle + Math.PI / 2) * final_yvel_this;
 	      this.vel[1] = Math.sin(col_angle) * final_xvel_this + Math.sin(col_angle + Math.PI / 2) * final_yvel_this;
 	      other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI / 2) * final_yvel_other;
@@ -412,6 +444,112 @@
 	}();
 	
 	exports.default = Mol;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _color_drop_mol = __webpack_require__(7);
+	
+	var _color_drop_mol2 = _interopRequireDefault(_color_drop_mol);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var ColorDrop = function () {
+	  function ColorDrop() {
+	    var X_POS = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 250;
+	    var mols = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
+	
+	    _classCallCheck(this, ColorDrop);
+	
+	    this.pos = X_POS, this.mols = mols;
+	    this.colorDrop = this.createMols();
+	  }
+	
+	  _createClass(ColorDrop, [{
+	    key: 'createMols',
+	    value: function createMols() {
+	      var colorDrops = [];
+	
+	      var newMol = new _color_drop_mol2.default();
+	      while (colorDrops.length < this.mols) {
+	        colorDrops.push(newMol);
+	        for (var i = 0; i < colorDrops.length - 1; i++) {
+	          if (newMol.isCollidedWith(colorDrops[i])) {
+	            colorDrops.pop;
+	          }
+	        }
+	      }
+	      return colorDrops;
+	    }
+	  }]);
+	
+	  return ColorDrop;
+	}();
+	
+	exports.default = ColorDrop;
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _util = __webpack_require__(4);
+	
+	var _util2 = _interopRequireDefault(_util);
+	
+	var _mol = __webpack_require__(5);
+	
+	var _mol2 = _interopRequireDefault(_mol);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var RADIUS = function RADIUS() {
+	  return 5;
+	};
+	
+	var VELOCITY = 1;
+	
+	var ColorDropMol = function (_Mol) {
+	  _inherits(ColorDropMol, _Mol);
+	
+	  function ColorDropMol() {
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	
+	    _classCallCheck(this, ColorDropMol);
+	
+	    options.color = '#ae1e1e';
+	    options.radius = RADIUS();
+	    options.pos = [Math.floor(Math.random() * 500), Math.floor(Math.random() * 500)];
+	    options.vel = [(Math.random() - 0.5) * VELOCITY, (Math.random() - 0.5) * VELOCITY];
+	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
+	  }
+	
+	  return ColorDropMol;
+	}(_mol2.default);
+	
+	exports.default = ColorDropMol;
 
 /***/ })
 /******/ ]);
