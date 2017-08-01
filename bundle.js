@@ -135,7 +135,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 50;
+	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 700;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -158,6 +158,7 @@
 	    value: function addWater() {
 	      var waterMol = new _water_mol2.default();
 	      this.waterMols.push(waterMol);
+	      waterMol.className = 'ball';
 	      return waterMol;
 	    }
 	  }, {
@@ -227,10 +228,10 @@
 	};
 	
 	var RADIUS = function RADIUS() {
-	  return 15;
+	  return 3;
 	};
 	
-	var VELOCITY = 8;
+	var VELOCITY = 1;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -242,7 +243,7 @@
 	
 	    options.color = '#D3D3D3';
 	    options.radius = RADIUS();
-	    options.pos = [Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000)];
+	    options.pos = [Math.floor(Math.random() * 500), Math.floor(Math.random() * 500)];
 	    options.vel = [(Math.random() - 0.5) * VELOCITY, (Math.random() - 0.5) * VELOCITY];
 	    return _possibleConstructorReturn(this, (WaterMol.__proto__ || Object.getPrototypeOf(WaterMol)).call(this, options));
 	  }
@@ -262,7 +263,7 @@
 	  value: true
 	});
 	var Util = {
-	  newVel: function newVel(r1, r2, v1, v2) {
+	  elasticCollision: function elasticCollision(r1, r2, v1, v2) {
 	    var mass1 = r1 * r1 * Math.PI;
 	    var mass2 = r2 * r2 * Math.PI;
 	    return (v1 * (mass1 - mass2) + 2 * mass2 * v2) / (mass1 + mass2);
@@ -316,21 +317,20 @@
 	  }, {
 	    key: 'move',
 	    value: function move() {
-	      console.log(window.innerHeight);
 	      if (this.pos[0] < 0) {
 	        this.pos[0] = 0;
 	        this.vel[0] *= -1;
 	      }
-	      if (this.pos[0] > window.innerWidth - 20) {
-	        this.pos[0] = window.innerWidth - 20;
+	      if (this.pos[0] > 500) {
+	        this.pos[0] = 500;
 	        this.vel[0] *= -1;
 	      }
 	      if (this.pos[1] < 0) {
 	        this.pos[1] = 0;
 	        this.vel[1] *= -1;
 	      }
-	      if (this.pos[1] > window.innerHeight - 20) {
-	        this.pos[1] = window.innerHeight - 20;
+	      if (this.pos[1] > 500) {
+	        this.pos[1] = 500;
 	        this.vel[1] *= -1;
 	      }
 	      this.pos[0] += this.vel[0];
@@ -350,7 +350,7 @@
 	      var dist = _util2.default.dist(x1, x2, y1, y2);
 	      var r1 = this.radius;
 	      var r2 = other.radius;
-	      return dist <= r1 + r2 + 2;
+	      return dist <= r1 + r2 + .5;
 	    }
 	
 	    // handleElasticCollision(other) {
@@ -378,10 +378,10 @@
 	      var new_yvel_this = magnitude_this * Math.sin(dir_this - col_angle);
 	      var new_xvel_other = magnitude_other * Math.cos(dir_other - col_angle);
 	      var new_yvel_other = magnitude_other * Math.sin(dir_other - col_angle);
-	      var final_xvel_this = _util2.default.newVel(this.radius, other.radius, new_xvel_this, new_xvel_other);
-	      var final_xvel_other = _util2.default.newVel(other.radius, this.radius, new_xvel_other, new_xvel_this);
-	      var final_yvel_this = new_yvel_this;
-	      var final_yvel_other = new_yvel_this;
+	      var final_xvel_this = _util2.default.elasticCollision(this.radius, other.radius, new_xvel_this, new_xvel_other);
+	      var final_xvel_other = _util2.default.elasticCollision(other.radius, this.radius, new_xvel_other, new_xvel_this);
+	      var final_yvel_this = _util2.default.elasticCollision(this.radius, other.radius, new_yvel_this, new_yvel_other);
+	      var final_yvel_other = _util2.default.elasticCollision(other.radius, this.radius, new_yvel_other, new_yvel_this);
 	      this.vel[0] = Math.cos(col_angle) * final_xvel_this + Math.cos(col_angle + Math.PI / 2) * final_yvel_this;
 	      this.vel[1] = Math.sin(col_angle) * final_xvel_this + Math.sin(col_angle + Math.PI / 2) * final_yvel_this;
 	      other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI / 2) * final_yvel_other;
