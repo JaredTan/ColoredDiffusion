@@ -93,10 +93,10 @@
 	
 	      setInterval(function () {
 	        return _this.movement();
-	      }, Math.floor(1000 / 60));
+	      }, Math.floor(1000 / 30));
 	      setInterval(function () {
 	        return _this.simulation.draw(_this.ctx);
-	      }, Math.floor(1000 / 60));
+	      }, Math.floor(1000 / 30));
 	    }
 	  }, {
 	    key: "movement",
@@ -135,7 +135,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2000;
+	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 500;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -227,10 +227,10 @@
 	};
 	
 	var RADIUS = function RADIUS() {
-	  return 5;
+	  return 9;
 	};
 	
-	var VELOCITY = 1;
+	var VELOCITY = 8;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -316,10 +316,29 @@
 	  }, {
 	    key: 'move',
 	    value: function move() {
-	      this.pos[0] = (this.pos[0] + this.vel[0]) % 1000;
-	      this.pos[0] < 0 ? this.pos[0] += 1000 : this.pos[0];
-	      this.pos[1] = (this.pos[1] + this.vel[1]) % 1000;
-	      this.pos[1] < 0 ? this.pos[1] += 1000 : this.pos[1];
+	      console.log(window.innerHeight);
+	      if (this.pos[0] < 0) {
+	        this.pos[0] = 0;
+	        this.vel[0] *= -1;
+	      }
+	      if (this.pos[0] > window.innerWidth - 20) {
+	        this.pos[0] = window.innerWidth - 20;
+	        this.vel[0] *= -1;
+	      }
+	      if (this.pos[1] < 0) {
+	        this.pos[1] = 0;
+	        this.vel[1] *= -1;
+	      }
+	      if (this.pos[1] > window.innerHeight - 20) {
+	        this.pos[1] = window.innerHeight - 20;
+	        this.vel[1] *= -1;
+	      }
+	      this.pos[0] += this.vel[0];
+	      this.pos[1] += this.vel[1];
+	      // this.pos[0] = (this.pos[0] + this.vel[0]) % 1000;
+	      // this.pos[0] < 0 ? this.pos[0] += 1000 : this.pos[0] ;
+	      // this.pos[1] = (this.pos[1] + this.vel[1]) % 1000;
+	      // this.pos[1] < 0 ? this.pos[1] += 1000 : this.pos[1];
 	    }
 	  }, {
 	    key: 'isCollidedWith',
@@ -331,7 +350,7 @@
 	      var dist = _util2.default.dist(x1, x2, y1, y2);
 	      var r1 = this.radius;
 	      var r2 = other.radius;
-	      return dist <= r1 + r2;
+	      return dist <= r1 + r2 + 5;
 	    }
 	  }, {
 	    key: 'handleElasticCollision',
@@ -358,10 +377,10 @@
 	      var overlapDist = r1 + r2 - distBetween;
 	      var dx = (x2 - x1) / overlapDist;
 	      var dy = (y2 - y1) / overlapDist;
-	      this.pos[0] -= overlapDist / 16 * dx;
-	      this.pos[1] -= overlapDist / 16 * dy;
-	      other.pos[0] += overlapDist / 16 * dx;
-	      other.pos[1] += overlapDist / 16 * dy;
+	      this.pos[0] -= overlapDist / 20 * dx;
+	      this.pos[1] -= overlapDist / 20 * dy;
+	      other.pos[0] += overlapDist / 20 * dx;
+	      other.pos[1] += overlapDist / 20 * dy;
 	    }
 	  }]);
 	
