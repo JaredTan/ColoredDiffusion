@@ -46,19 +46,18 @@ Also, to accompany the simulation, there will also be
 
 ## Technologies
 
-Easel JS will be used to render high performance 2D graphics.
+The first implementation will be built using strictly vanilla ES6 Javascript.
 
 ## Implementation Timeline
 
 ### Day 1
 
 + Set Up Canvas
-+ Learn EaselJS and how to effectively display particle interactions
++ Effectively display particle interactions
 + Begin writing OOP Javascript for the particles
 
 ### Day 2
 
-+ Continue learning EaselJS
 + Continue writing vanilla javascript
 + Add user input scroll bars
 
@@ -70,7 +69,7 @@ Easel JS will be used to render high performance 2D graphics.
 
 ### Day 4
 
-+ Style with more Easel
++ Style
 + Check that all functions are working correctly
 + Add Github link
 
@@ -80,4 +79,5 @@ Easel JS will be used to render high performance 2D graphics.
 
 - [ ] Add solvent effects - such as using other solvents than water such as oil or soap.
 
+- [ ] Learn physics library - Matter.js / P5.js
 - [ ] Turn into some sort of interactive game.

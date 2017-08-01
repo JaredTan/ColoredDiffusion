@@ -135,7 +135,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 500;
+	    var NUM_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 50;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -227,7 +227,7 @@
 	};
 	
 	var RADIUS = function RADIUS() {
-	  return 9;
+	  return 15;
 	};
 	
 	var VELOCITY = 8;
@@ -350,19 +350,43 @@
 	      var dist = _util2.default.dist(x1, x2, y1, y2);
 	      var r1 = this.radius;
 	      var r2 = other.radius;
-	      return dist <= r1 + r2 + 5;
+	      return dist <= r1 + r2 + 2;
 	    }
+	
+	    // handleElasticCollision(other) {
+	    //   let thisOldX = this.vel[0];
+	    //   let thisOldY = this.vel[1];
+	    //   let otherOldX = this.vel[0];
+	    //   let otherOldY = this.vel[1];
+	    //   this.vel[0] = Util.newVel(this.radius, other.radius, thisOldX, otherOldX);
+	    //   this.vel[1] = Util.newVel(this.radius, other.radius, thisOldY, otherOldY);
+	    //   other.vel[0] = Util.newVel(other.radius, this.radius, otherOldX, thisOldX);
+	    //   other.vel[1] = Util.newVel(other.radius, this.radius, otherOldY, thisOldY);
+	    // }
+	
 	  }, {
 	    key: 'handleElasticCollision',
 	    value: function handleElasticCollision(other) {
-	      var thisOldX = this.vel[0];
-	      var thisOldY = this.vel[1];
-	      var otherOldX = this.vel[0];
-	      var otherOldY = this.vel[1];
-	      this.vel[0] = _util2.default.newVel(this.radius, other.radius, thisOldX, otherOldX);
-	      this.vel[1] = _util2.default.newVel(this.radius, other.radius, thisOldY, otherOldY);
-	      other.vel[0] = _util2.default.newVel(other.radius, this.radius, otherOldX, thisOldX);
-	      other.vel[1] = _util2.default.newVel(other.radius, this.radius, otherOldY, thisOldY);
+	      var dx = this.pos[0] - other.pos[0];
+	      var dy = this.pos[1] - other.pos[1];
+	      var col_angle = Math.atan2(dy, dx);
+	      var magnitude_this = Math.sqrt(this.vel[0] * this.vel[0] + this.vel[1] * this.vel[1]);
+	      var magnitude_other = Math.sqrt(other.vel[0] * other.vel[0] + other.vel[1] * other.vel[1]);
+	      var dir_this = Math.atan2(this.vel[1], this.vel[0]);
+	      var dir_other = Math.atan2(other.vel[1], other.vel[0]);
+	      var new_xvel_this = magnitude_this * Math.cos(dir_this - col_angle);
+	      var new_yvel_this = magnitude_this * Math.sin(dir_this - col_angle);
+	      var new_xvel_other = magnitude_other * Math.cos(dir_other - col_angle);
+	      var new_yvel_other = magnitude_other * Math.sin(dir_other - col_angle);
+	      var final_xvel_this = _util2.default.newVel(this.radius, other.radius, new_xvel_this, new_xvel_other);
+	      var final_xvel_other = _util2.default.newVel(other.radius, this.radius, new_xvel_other, new_xvel_this);
+	      var final_yvel_this = new_yvel_this;
+	      var final_yvel_other = new_yvel_this;
+	      this.vel[0] = Math.cos(col_angle) * final_xvel_this + Math.cos(col_angle + Math.PI / 2) * final_yvel_this;
+	      this.vel[1] = Math.sin(col_angle) * final_xvel_this + Math.sin(col_angle + Math.PI / 2) * final_yvel_this;
+	      other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI / 2) * final_yvel_other;
+	      other.vel[1] = Math.sin(col_angle) * final_xvel_other + Math.sin(col_angle + Math.PI / 2) * final_yvel_other;
+	      ;
 	    }
 	  }, {
 	    key: 'separateObjects',
@@ -377,10 +401,10 @@
 	      var overlapDist = r1 + r2 - distBetween;
 	      var dx = (x2 - x1) / overlapDist;
 	      var dy = (y2 - y1) / overlapDist;
-	      this.pos[0] -= overlapDist / 20 * dx;
-	      this.pos[1] -= overlapDist / 20 * dy;
-	      other.pos[0] += overlapDist / 20 * dx;
-	      other.pos[1] += overlapDist / 20 * dy;
+	      this.pos[0] -= overlapDist / 15 * dx;
+	      this.pos[1] -= overlapDist / 15 * dy;
+	      other.pos[0] += overlapDist / 15 * dx;
+	      other.pos[1] += overlapDist / 15 * dy;
 	    }
 	  }]);
 	
