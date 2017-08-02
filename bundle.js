@@ -213,6 +213,11 @@
 	    key: 'addDrop',
 	    value: function addDrop() {
 	      var numDrops = document.getElementById('drop-count').value;
+	      if (numDrops > 500) {
+	        numDrops = 500;
+	      } else if (numDrops < 0) {
+	        numDrops = 0;
+	      }
 	      for (var i = 0; i < numDrops; i++) {
 	        var newDrop = new _color_drop_mol2.default();
 	        this.mols.push(newDrop);
@@ -572,7 +577,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var RADIUS = function RADIUS() {
-	  return 3;
+	  return 2;
 	};
 	
 	var VELOCITY = 2;
@@ -587,7 +592,7 @@
 	
 	    options.color = document.getElementById('color').value;
 	    options.radius = RADIUS();
-	    options.pos = [Math.floor(Math.random() * 10) + 225, 0];
+	    options.pos = [Math.floor(Math.random() * 5) + 225, 0];
 	    options.vel = [0, -1 * VELOCITY];
 	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
 	  }
