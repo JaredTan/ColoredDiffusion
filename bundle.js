@@ -62,14 +62,10 @@
 	  canvas.width = dimension[0];
 	  canvas.height = dimension[1];
 	  var ctx = canvas.getContext('2d');
-	  var dropButton = document.getElementById('drop-btn');
 	  var resetButton = document.getElementById('reset-btn');
 	  var tempBar = document.getElementById('range-bar');
 	  var simView = new _sim_view2.default(new _simulation2.default(), ctx);
 	  simView.start();
-	  dropButton.addEventListener('click', function () {
-	    return simView.addDrop();
-	  });
 	  resetButton.addEventListener('click', function () {
 	    return location.reload();
 	  });
