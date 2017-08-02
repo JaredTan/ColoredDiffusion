@@ -224,12 +224,12 @@
 	  }, {
 	    key: 'handleTempChange',
 	    value: function handleTempChange(newTemp) {
-	      var multiplier = newTemp / 25;
+	      console.log(newTemp);
+	      var multiplier = 1 + (newTemp - 10) / 25;
 	      this.mols.forEach(function (mol) {
-	        console.log(mol.tempMultipler);
-	        console.log(multiplier);
-	        mol.vel[0] *= 1 + (multiplier - mol.tempMultipler);
-	        mol.vel[1] *= 1 + (multiplier - mol.tempMultipler);
+	        var energyRatio = multiplier / mol.tempMultipler;
+	        mol.vel[0] *= x;
+	        mol.vel[1] *= x;
 	        mol.tempMultipler = multiplier;
 	      });
 	    }
@@ -303,7 +303,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 3;
+	var VELOCITY = 0.5;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -375,7 +375,7 @@
 	    this.vel = options.vel;
 	    this.radius = options.radius;
 	    this.color = options.color;
-	    this.tempMultipler = 0;
+	    this.tempMultipler = 1;
 	  }
 	
 	  _createClass(Mol, [{
