@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
   </head>
   <body>
-    <div class="header">
+    <div class="left-header">
       <h1 class='title'>Colored Diffusion</h1>
       <h2 class='subtitle'>An Ink-Droplet Visualizer</h2>
       <div class="logos">
@@ -19,6 +19,8 @@
           <i class="fa fa-linkedin-square fa-2x"></i>
         </a>
       </div>
+    </div>
+    <div class='right-header'>
       <div class="buttons">
         <div class="temp-bar-color">
           <div class="temp-bar">
@@ -37,10 +39,9 @@
       </div>
       <div class="drop">
         <button class='btn'id="drop-btn">Drop!</button>
-        <input type="number" name="count" id='drop-count'value="100"> max: 500
+        <input type="number" name="count" id='drop-count'value="75"> max: 500
       </div>
         <div class="small-buttons">
-          <button class='small-btn'id="hide-btn">Toggle Water</button>
           <button class='small-btn'id='reset-btn'>Reset</button>
         </div>
       </div>
@@ -50,7 +51,7 @@
     const showValue = (newValue) => document.getElementById("range").innerHTML=`Temp: ${newValue}°C`;
     </script>
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.scss" />
-    <canvas id="canvas" width="500" height="500"></canvas>
+    <canvas id="canvas"></canvas>
     <script type="application/javascript" src="bundle.js"></script>
   </body>
 </html>
