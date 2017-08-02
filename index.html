@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Colored Diffusion</title>
+    <title>Colored Diffusion Visualizer</title>
    <script src="https://use.fontawesome.com/872b3d4c1a.js"></script>
    <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
@@ -10,6 +10,7 @@
   <body>
     <div class="header">
       <h1 class='title'>Colored Diffusion</h1>
+      <h2 class='subtitle'>An Ink-Droplet Visualizer</h2>
       <div class="logos">
         <a href="https://github.com/JaredTan/ColoredDiffusion">
           <i class="fa fa-github fa-2x"></i>
@@ -18,13 +19,13 @@
           <i class="fa fa-linkedin-square fa-2x"></i>
         </a>
       </div>
-      <div class="temp-bar">
-        <span>Temperature</span>
-        <input type="range" min="10" max="60" value="10" step="5"
-        onchange="showValue(this.value)" id='range-bar'/>
-        <span id="range">10°C</span>
-      </div>
       <div class="buttons">
+        <div class="temp-bar-color">
+          <div class="temp-bar">
+            <span id="range">Temp: 10°C</span>
+            <input type="range" min="10" max="60" value="10" step="5"
+            onchange="showValue(this.value)" id='range-bar'/>
+          </div>
         <div class="color-choice">
           <select id='color'name="color">
             <option value="#b51717" selected>Red</option>
@@ -33,7 +34,9 @@
             <option value="#139047">Green</option>
           </select>
         </div>
+      </div>
         <button class='btn'id="drop-btn">Drop!</button>
+        x<input type="number" name="count" id='drop-count'value="5">
         <div class="small-buttons">
           <button class='small-btn'id="hide-btn">Toggle Water</button>
           <button class='small-btn'id='reset-btn'>Reset</button>
@@ -42,7 +45,7 @@
     </div>
     <html>
     <script type="text/javascript">
-    const showValue = (newValue) => document.getElementById("range").innerHTML=`${newValue}°C`;
+    const showValue = (newValue) => document.getElementById("range").innerHTML=`Temp: ${newValue}°C`;
     </script>
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.scss" />
     <canvas id="canvas" width="500" height="500"></canvas>

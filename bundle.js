@@ -74,7 +74,7 @@
 	  resetButton.addEventListener('click', function () {
 	    return location.reload();
 	  });
-	  tempBar.addEventListener('change', function (e) {
+	  tempBar.addEventListener('input', function (e) {
 	    e.preventDefault();
 	    var newTemp = parseInt(e.currentTarget.value);
 	    simView.handleTempChange(newTemp);
@@ -212,8 +212,11 @@
 	  }, {
 	    key: 'addDrop',
 	    value: function addDrop() {
-	      var newDrop = new _color_drop_mol2.default();
-	      this.mols.push(newDrop);
+	      var numDrops = document.getElementById('drop-count').value;
+	      for (var i = 0; i < numDrops; i++) {
+	        var newDrop = new _color_drop_mol2.default();
+	        this.mols.push(newDrop);
+	      }
 	      // newDrop.colorDrop.forEach(mol => this.mols.push(mol));
 	    }
 	
@@ -224,12 +227,11 @@
 	  }, {
 	    key: 'handleTempChange',
 	    value: function handleTempChange(newTemp) {
-	      console.log(newTemp);
 	      var multiplier = 1 + (newTemp - 10) / 25;
+	      var energyRatio = multiplier / this.mols[0].tempMultipler;
 	      this.mols.forEach(function (mol) {
-	        var energyRatio = multiplier / mol.tempMultipler;
-	        mol.vel[0] *= x;
-	        mol.vel[1] *= x;
+	        mol.vel[0] *= energyRatio;
+	        mol.vel[1] *= energyRatio;
 	        mol.tempMultipler = multiplier;
 	      });
 	    }
@@ -303,7 +305,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 0.5;
+	var VELOCITY = 1;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -570,10 +572,10 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var RADIUS = function RADIUS() {
-	  return 5;
+	  return 3;
 	};
 	
-	var VELOCITY = 3;
+	var VELOCITY = 2;
 	
 	var ColorDropMol = function (_Mol) {
 	  _inherits(ColorDropMol, _Mol);
@@ -585,7 +587,7 @@
 	
 	    options.color = document.getElementById('color').value;
 	    options.radius = RADIUS();
-	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
+	    options.pos = [Math.floor(Math.random() * 10) + 225, 0];
 	    options.vel = [0, -1 * VELOCITY];
 	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
 	  }
