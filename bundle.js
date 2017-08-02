@@ -265,6 +265,8 @@
 	          if (mol1.isCollidedWith(mol2)) {
 	            mol1.separateObjects(mol2);
 	            mol1.handleElasticCollision(mol2);
+	
+	            mol1.blendColors(mol2);
 	          }
 	        }
 	      }
@@ -310,7 +312,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 1;
+	var VELOCITY = 0.5;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -489,6 +491,30 @@
 	      other.pos[0] += overlapDist / 15 * dx;
 	      other.pos[1] += overlapDist / 15 * dy;
 	    }
+	
+	    // https://coderwall.com/p/z8uxzw/javascript-color-blender taken from here
+	
+	  }, {
+	    key: 'blendColors',
+	    value: function blendColors(other) {
+	      var color1 = this.color;
+	      var color2 = other.color;
+	      if (color1.length == 4) color1 = color1[1] + color1[1] + color1[2] + color1[2] + color1[3] + color1[3];else color1 = color1.substring(1);
+	      if (color2.length == 4) color2 = color2[1] + color2[1] + color2[2] + color2[2] + color2[3] + color2[3];else color2 = color2.substring(1);
+	      color1 = [parseInt(color1[0] + color1[1], 16), parseInt(color1[2] + color1[3], 16), parseInt(color1[4] + color1[5], 16)];
+	      color2 = [parseInt(color2[0] + color2[1], 16), parseInt(color2[2] + color2[3], 16), parseInt(color2[4] + color2[5], 16)];
+	      var color3 = [(1 - 0.5) * color1[0] + 0.5 * color2[0], (1 - 0.5) * color1[1] + 0.5 * color2[1], (1 - 0.5) * color1[2] + 0.5 * color2[2]];
+	      color3 = '#' + this.int_to_hex(color3[0]) + this.int_to_hex(color3[1]) + this.int_to_hex(color3[2]);
+	      this.color = color3;
+	      other.color = color3;
+	    }
+	  }, {
+	    key: 'int_to_hex',
+	    value: function int_to_hex(num) {
+	      var hex = Math.round(num).toString(16);
+	      if (hex.length == 1) hex = '0' + hex;
+	      return hex;
+	    }
 	  }]);
 	
 	  return Mol;
@@ -592,7 +618,7 @@
 	
 	    options.color = document.getElementById('color').value;
 	    options.radius = RADIUS();
-	    options.pos = [Math.floor(Math.random() * 5) + 225, 0];
+	    options.pos = [Math.floor(Math.random() * 6) + 247, 0];
 	    options.vel = [0, -1 * VELOCITY];
 	    return _possibleConstructorReturn(this, (ColorDropMol.__proto__ || Object.getPrototypeOf(ColorDropMol)).call(this, options));
 	  }
