@@ -22,15 +22,19 @@
   margin-right: 20px;
 }
 
-#color {
-  margin-top: 10px;
-}
+// #color {
+//   margin-top: 10px;
+// }
 
 .color-choice {
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
+  text-transform: none;
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
 }
+
+
 #canvas {
   background-color: #e7fafe;
   padding-left: 0;
@@ -69,6 +73,11 @@
   background: #2cafc9;
 }
 
+.small-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .small-btn {
   font-size: 12px;
   padding: 5px;
@@ -86,6 +95,8 @@
   background: #2cafc9;
 }
 
+
+
 html, body, header, nav, h1, a,
 ul, li, strong, main, button, i,
 section, img, div, h2, p, form,
@@ -102,3 +113,52 @@ span, article, footer, time, small {
   background: transparent;
   font-family: 'Comfortaa', cursive;
 }
+
+
+.color-choice {
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  height: 30px;
+  width: 240px;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background-color: #eae8e6;
+}
+
+.color-choice select {
+  background: transparent;
+  border: none;
+  height: 30px;
+  width: 240px;
+  padding: 5px;
+  font-size: 12px;
+}
+.styled-select {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+.styled-select select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px;
+   width: 268px;
+}
+
+.rounded {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+
+.blue    { background-color: #3b8ec2; }
+
+.blue select    { color: #fff; }

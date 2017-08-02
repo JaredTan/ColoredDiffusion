@@ -59,13 +59,13 @@
 	document.addEventListener("DOMContentLoaded", function () {
 	  var canvas = document.getElementById('canvas');
 	  var ctx = canvas.getContext('2d');
-	  var $dropButton = document.getElementById('drop-btn');
+	  var dropButton = document.getElementById('drop-btn');
 	  var $hideButton = document.getElementById('hide-btn');
 	  var $resetButton = document.getElementById('reset-btn');
 	
 	  var diffusion = new _sim_view2.default(new _simulation2.default(), ctx);
 	  diffusion.start();
-	  $dropButton.addEventListener('click', function () {
+	  dropButton.addEventListener('click', function () {
 	    diffusion.addDrop();
 	  });
 	  $hideButton.addEventListener('click', function () {
@@ -75,11 +75,6 @@
 	    return location.reload();
 	  });
 	});
-	
-	// $(document).ready(() => {
-	//   const $dropButton = document.getElementById('drop-btn');
-	//   $dropButton.addEventListener('click', () => new ColorDrop())
-	// })
 
 /***/ }),
 /* 1 */
@@ -560,7 +555,7 @@
 	
 	    _classCallCheck(this, ColorDropMol);
 	
-	    options.color = $("#color").val();
+	    options.color = document.getElementById('color').value;
 	    options.radius = RADIUS();
 	    options.pos = [Math.floor(Math.random() * 50) + 225, 0];
 	    options.vel = [0, -1 * VELOCITY];
