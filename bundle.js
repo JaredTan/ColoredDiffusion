@@ -62,17 +62,22 @@
 	  var dropButton = document.getElementById('drop-btn');
 	  var hideButton = document.getElementById('hide-btn');
 	  var resetButton = document.getElementById('reset-btn');
-	
-	  var diffusion = new _sim_view2.default(new _simulation2.default(), ctx);
-	  diffusion.start();
+	  var tempBar = document.getElementById('range-bar');
+	  var simView = new _sim_view2.default(new _simulation2.default(), ctx);
+	  simView.start();
 	  dropButton.addEventListener('click', function () {
-	    diffusion.addDrop();
+	    return simView.addDrop();
 	  });
 	  hideButton.addEventListener('click', function () {
-	    return diffusion.toggleWater();
+	    return simView.toggleWater();
 	  });
 	  resetButton.addEventListener('click', function () {
 	    return location.reload();
+	  });
+	  tempBar.addEventListener('change', function (e) {
+	    e.preventDefault();
+	    var newTemp = parseInt(e.currentTarget.value);
+	    simView.handleTempChange(newTemp);
 	  });
 	});
 
@@ -108,7 +113,7 @@
 	      }, Math.floor(1000 / 30));
 	      setInterval(function () {
 	        return _this.simulation.draw(_this.ctx);
-	      }, Math.floor(1000 / 60));
+	      }, Math.floor(1000 / 30));
 	    }
 	  }, {
 	    key: "movement",
@@ -125,6 +130,11 @@
 	    key: "toggleWater",
 	    value: function toggleWater() {
 	      this.simulation.toggleWater();
+	    }
+	  }, {
+	    key: "handleTempChange",
+	    value: function handleTempChange(newTemp) {
+	      this.simulation.handleTempChange(newTemp);
 	    }
 	  }]);
 	
@@ -206,6 +216,23 @@
 	      this.mols.push(newDrop);
 	      // newDrop.colorDrop.forEach(mol => this.mols.push(mol));
 	    }
+	
+	    // Temp ~ K.E. KE = 1/2 * m * v^2
+	    // v^2 = 2KE/m
+	    // v = sqrt2KE/m
+	
+	  }, {
+	    key: 'handleTempChange',
+	    value: function handleTempChange(newTemp) {
+	      var multiplier = newTemp / 25;
+	      this.mols.forEach(function (mol) {
+	        console.log(mol.tempMultipler);
+	        console.log(multiplier);
+	        mol.vel[0] *= 1 + (multiplier - mol.tempMultipler);
+	        mol.vel[1] *= 1 + (multiplier - mol.tempMultipler);
+	        mol.tempMultipler = multiplier;
+	      });
+	    }
 	  }, {
 	    key: 'draw',
 	    value: function draw(ctx) {
@@ -276,7 +303,7 @@
 	  return 3;
 	};
 	
-	var VELOCITY = 0.5;
+	var VELOCITY = 3;
 	
 	var WaterMol = function (_Mol) {
 	  _inherits(WaterMol, _Mol);
@@ -348,6 +375,7 @@
 	    this.vel = options.vel;
 	    this.radius = options.radius;
 	    this.color = options.color;
+	    this.tempMultipler = 0;
 	  }
 	
 	  _createClass(Mol, [{

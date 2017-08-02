@@ -5,9 +5,7 @@
     <title>Colored Diffusion</title>
    <script src="https://use.fontawesome.com/872b3d4c1a.js"></script>
    <link href="https://fonts.googleapis.com/css?family=Bellefair" rel="stylesheet">
-
   <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-
   </head>
   <body>
     <div class="header">
@@ -20,13 +18,13 @@
           <i class="fa fa-linkedin-square fa-2x"></i>
         </a>
       </div>
+      <div class="temp-bar">
+        <span>Temperature</span>
+        <input type="range" min="0" max="50" value="0" step="5"
+        onchange="showValue(this.value)" id='range-bar'/>
+        <span id="range">0°C</span>
+      </div>
       <div class="buttons">
-        <div class="temp-bar">
-          <input type="range" min="0" max="50" value="0" step="5"
-          onchange="showValue(this.value)"/>
-          <span id="range">0°C</span>
-        </div>
-
         <div class="color-choice">
           <select id='color'name="color">
             <option value="#b51717" selected>Red</option>
@@ -34,7 +32,6 @@
             <option value="#e2bf22">Yellow</option>
             <option value="#139047">Green</option>
           </select>
-
         </div>
         <button class='btn'id="drop-btn">Drop!</button>
         <div class="small-buttons">
@@ -44,10 +41,9 @@
       </div>
     </div>
     <html>
-<script type="text/javascript">
-const showValue = (newValue) => document.getElementById("range").innerHTML=`${newValue}°C`;
-</script>
-
+    <script type="text/javascript">
+    const showValue = (newValue) => document.getElementById("range").innerHTML=`${newValue}°C`;
+    </script>
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.scss" />
     <canvas id="canvas" width="500" height="500"></canvas>
     <script type="application/javascript" src="bundle.js"></script>

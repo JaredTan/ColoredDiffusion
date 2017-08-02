@@ -22,10 +22,6 @@
   margin-right: 20px;
 }
 
-// #color {
-//   margin-top: 10px;
-// }
-
 .color-choice {
   text-transform: none;
   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
@@ -33,7 +29,6 @@
    overflow: hidden;
    width: 240px;
 }
-
 
 #canvas {
   background-color: #e7fafe;
@@ -48,6 +43,10 @@
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.temp-bar {
+  margin-left: 40%;
 }
 
 .buttons {
