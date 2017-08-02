@@ -21,6 +21,12 @@
         </a>
       </div>
       <div class="buttons">
+        <div class="temp-bar">
+          <input type="range" min="0" max="50" value="0" step="5"
+          onchange="showValue(this.value)"/>
+          <span id="range">0°C</span>
+        </div>
+
         <div class="color-choice">
           <select id='color'name="color">
             <option value="#b51717" selected>Red</option>
@@ -37,6 +43,10 @@
         </div>
       </div>
     </div>
+    <html>
+<script type="text/javascript">
+const showValue = (newValue) => document.getElementById("range").innerHTML=`${newValue}°C`;
+</script>
 
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.scss" />
     <canvas id="canvas" width="500" height="500"></canvas>

@@ -60,18 +60,18 @@
 	  var canvas = document.getElementById('canvas');
 	  var ctx = canvas.getContext('2d');
 	  var dropButton = document.getElementById('drop-btn');
-	  var $hideButton = document.getElementById('hide-btn');
-	  var $resetButton = document.getElementById('reset-btn');
+	  var hideButton = document.getElementById('hide-btn');
+	  var resetButton = document.getElementById('reset-btn');
 	
 	  var diffusion = new _sim_view2.default(new _simulation2.default(), ctx);
 	  diffusion.start();
 	  dropButton.addEventListener('click', function () {
 	    diffusion.addDrop();
 	  });
-	  $hideButton.addEventListener('click', function () {
+	  hideButton.addEventListener('click', function () {
 	    return diffusion.toggleWater();
 	  });
-	  $resetButton.addEventListener('click', function () {
+	  resetButton.addEventListener('click', function () {
 	    return location.reload();
 	  });
 	});
