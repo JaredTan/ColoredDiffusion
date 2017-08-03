@@ -18,6 +18,10 @@
         <a href="">
           <i class="fa fa-linkedin-square fa-2x"></i>
         </a>
+        <div id="click-message">
+          <h4>Click anywhere on the screen</h4>
+          <h4>And wait...</h4>
+        </div>
       </div>
     </div>
     <div class='right-header'>
@@ -36,11 +40,12 @@
             <option value="#008000">Green</option>
             <option value="#800080">Purple</option>
             <option value="#000000">Black</option>
+            <option value="#800000">Maroon</option>
           </select>
         </div>
       </div>
       <div class="drop">
-        <input type="number" name="count" id='drop-count'value="75"> #molecules - max: 500
+      <input type="number" name="count" id='drop-count'value="75"> molecules (max: 250)
       </div>
         <div class="small-buttons">
           <button class='small-btn'id='reset-btn'>Reset</button>
@@ -54,6 +59,7 @@
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.scss" />
     <canvas id="canvas"></canvas>
     <script type="application/javascript" src="bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </body>
 </html>
 <html>

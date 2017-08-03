@@ -29,7 +29,7 @@
 .logos {
   display: flex;
   align-items: center;
-  color: #0015D5;
+  color: #800000;
   margin-top: -5px;
   margin-bottom: 20px;
 }
@@ -50,12 +50,20 @@
   background-color: #f8fdff;
   padding-left: 0;
   border-radius: 25px;
-
-
   padding-right: 0;
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+#click-message {
+  position: fixed;
+  width: 500px;
+  height: 200px;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px; /* Negative half of height. */
+  margin-left: -150px; /* Negative half of width. */
 }
 
 .temp-bar-color {
@@ -76,18 +84,20 @@
 
 .drop {
   display: flex;
+  margin-top: -2px;
   align-items: baseline;
 }
 
 #drop-count {
-  height: 30px;
-  width: 55px;
+  width: 51px;
+  margin-right:4px;
   text-align: center;
   font-size: 16px;
   border: 1px solid #9e9e9e;
   border-radius: 10px;
   background-color: #eae8e6;
   display: flex;
+  margin-top: 10px;
   align-items: center;
 }
 
@@ -103,9 +113,9 @@
   border: 1px solid #9e9e9e;
   border-radius: 25px;
   cursor: pointer;
-  color: #1c2021;
+  color: #800000;
   background-color: #53d0ea;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover {
@@ -121,12 +131,11 @@
   font-size: 12px;
   padding: 5px;
   vertical-align: middle;
-  margin-top: 20px;
+  margin-top: 8px;
   border: 1px solid #9e9e9e;
   border-radius: 25px;
   cursor: pointer;
-  color: #1c2021;
-  background-color: #86d4e4;
+  color: #800000;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 

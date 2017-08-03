@@ -77,6 +77,7 @@
 	  canvas.addEventListener('click', function (e) {
 	    return simView.addDropEvent(e);
 	  }, false);
+	  $('#click-message').fadeIn().delay(1000).fadeOut();
 	});
 
 /***/ }),
@@ -203,8 +204,8 @@
 	    key: 'addDrop',
 	    value: function addDrop() {
 	      var numDrops = document.getElementById('drop-count').value;
-	      if (numDrops > 500) {
-	        numDrops = 500;
+	      if (numDrops > 250) {
+	        numDrops = 250;
 	      } else if (numDrops < 0) {
 	        numDrops = 0;
 	      }
@@ -560,7 +561,7 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var RADIUS = function RADIUS() {
-	  return 9;
+	  return 8;
 	};
 	
 	var VELOCITY = 3;
