@@ -77,7 +77,7 @@
 	  canvas.addEventListener('click', function (e) {
 	    return simView.addDropEvent(e);
 	  }, false);
-	  $('#click-message').fadeIn().delay(1000).fadeOut();
+	  $('#click-message').fadeIn().delay(3000).fadeOut();
 	});
 
 /***/ }),
@@ -163,7 +163,7 @@
 	
 	var _water_mol2 = _interopRequireDefault(_water_mol);
 	
-	var _color_drop_mol = __webpack_require__(7);
+	var _color_drop_mol = __webpack_require__(6);
 	
 	var _color_drop_mol2 = _interopRequireDefault(_color_drop_mol);
 	
@@ -175,7 +175,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 300;
+	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -199,21 +199,6 @@
 	      var waterMol = new _water_mol2.default();
 	      this.mols.push(waterMol);
 	      return waterMol;
-	    }
-	  }, {
-	    key: 'addDrop',
-	    value: function addDrop() {
-	      var numDrops = document.getElementById('drop-count').value;
-	      if (numDrops > 250) {
-	        numDrops = 250;
-	      } else if (numDrops < 0) {
-	        numDrops = 0;
-	      }
-	      for (var i = 0; i < numDrops; i++) {
-	        var newDrop = new _color_drop_mol2.default();
-	        this.mols.push(newDrop);
-	      }
-	      // newDrop.colorDrop.forEach(mol => this.mols.push(mol));
 	    }
 	  }, {
 	    key: 'addDropEvent',
@@ -315,10 +300,10 @@
 	};
 	
 	var RADIUS = function RADIUS() {
-	  return 5;
+	  return 6;
 	};
 	
-	var VELOCITY = 0.1;
+	var VELOCITY = 0.3;
 	
 	var screenWidth = document.documentElement.clientWidth;
 	var screenHeight = document.documentElement.clientHeight;
@@ -428,10 +413,6 @@
 	      }
 	      this.pos[0] += this.vel[0];
 	      this.pos[1] += this.vel[1];
-	      // this.pos[0] = (this.pos[0] + this.vel[0]) % 1000;
-	      // this.pos[0] < 0 ? this.pos[0] += 1000 : this.pos[0] ;
-	      // this.pos[1] = (this.pos[1] + this.vel[1]) % 1000;
-	      // this.pos[1] < 0 ? this.pos[1] += 1000 : this.pos[1];
 	    }
 	  }, {
 	    key: 'isCollidedWith',
@@ -445,18 +426,6 @@
 	      var r2 = other.radius;
 	      return dist <= r1 + r2 + .5;
 	    }
-	
-	    // handleElasticCollision(other) {
-	    //   let thisOldX = this.vel[0];
-	    //   let thisOldY = this.vel[1];
-	    //   let otherOldX = this.vel[0];
-	    //   let otherOldY = this.vel[1];
-	    //   this.vel[0] = Util.newVel(this.radius, other.radius, thisOldX, otherOldX);
-	    //   this.vel[1] = Util.newVel(this.radius, other.radius, thisOldY, otherOldY);
-	    //   other.vel[0] = Util.newVel(other.radius, this.radius, otherOldX, thisOldX);
-	    //   other.vel[1] = Util.newVel(other.radius, this.radius, otherOldY, thisOldY);
-	    // }
-	
 	  }, {
 	    key: 'handleElasticCollision',
 	    value: function handleElasticCollision(other) {
@@ -475,9 +444,6 @@
 	      var final_xvel_other = _util2.default.elasticCollision(other.radius, this.radius, new_xvel_other, new_xvel_this);
 	      var final_yvel_this = new_yvel_this;
 	      var final_yvel_other = new_yvel_other;
-	
-	      // let final_yvel_this = Util.elasticCollision(this.radius, other.radius, new_yvel_this, new_yvel_other);
-	      // let final_yvel_other = Util.elasticCollision(other.radius, this.radius, new_yvel_other, new_yvel_this);
 	      this.vel[0] = Math.cos(col_angle) * final_xvel_this + Math.cos(col_angle + Math.PI / 2) * final_yvel_this;
 	      this.vel[1] = Math.sin(col_angle) * final_xvel_this + Math.sin(col_angle + Math.PI / 2) * final_yvel_this;
 	      other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI / 2) * final_yvel_other;
@@ -503,7 +469,7 @@
 	      other.pos[1] += overlapDist / 15 * dy;
 	    }
 	
-	    // https://coderwall.com/p/z8uxzw/javascript-color-blender taken from here
+	    // https://coderwall.com/p/z8uxzw/javascript-color-blender adapted from here, added own color changes
 	
 	  }, {
 	    key: 'blendColors',
@@ -514,10 +480,24 @@
 	      if (color2.length == 4) color2 = color2[1] + color2[1] + color2[2] + color2[2] + color2[3] + color2[3];else color2 = color2.substring(1);
 	      color1 = [parseInt(color1[0] + color1[1], 16), parseInt(color1[2] + color1[3], 16), parseInt(color1[4] + color1[5], 16)];
 	      color2 = [parseInt(color2[0] + color2[1], 16), parseInt(color2[2] + color2[3], 16), parseInt(color2[4] + color2[5], 16)];
-	      var color3 = [(1 - 0.5) * color1[0] + 0.5 * color2[0], (1 - 0.5) * color1[1] + 0.5 * color2[1], (1 - 0.5) * color1[2] + 0.5 * color2[2]];
+	      var color3 = [0.5 * color1[0] + 0.5 * color2[0], 0.5 * color1[1] + 0.5 * color2[1], 0.5 * color1[2] + 0.5 * color2[2]];
+	      var color4 = [0.75 * color1[0] + 0.25 * color2[0], 0.75 * color1[1] + 0.25 * color2[1], 0.75 * color1[2] + 0.25 * color2[2]];
+	      var color5 = [0.25 * color1[0] + 0.75 * color2[0], 0.25 * color1[1] + 0.75 * color2[1], 0.25 * color1[2] + 0.75 * color2[2]];
+	
 	      color3 = '#' + this.int_to_hex(color3[0]) + this.int_to_hex(color3[1]) + this.int_to_hex(color3[2]);
-	      this.color = color3;
-	      other.color = color3;
+	      color4 = '#' + this.int_to_hex(color4[0]) + this.int_to_hex(color4[1]) + this.int_to_hex(color4[2]);
+	      color5 = '#' + this.int_to_hex(color5[0]) + this.int_to_hex(color5[1]) + this.int_to_hex(color5[2]);
+	
+	      if (this.radius < other.radius) {
+	        this.color = color4;
+	        other.color = color5;
+	      } else if (this.radius == other.radius) {
+	        this.color = color3;
+	        other.color = color3;
+	      } else {
+	        this.color = color5;
+	        other.color = color4;
+	      }
 	    }
 	  }, {
 	    key: 'int_to_hex',
@@ -534,8 +514,7 @@
 	exports.default = Mol;
 
 /***/ }),
-/* 6 */,
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
