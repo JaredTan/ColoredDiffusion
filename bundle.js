@@ -170,21 +170,15 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
+	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 500;
 	
 	    _classCallCheck(this, Sim);
 	
 	    this.DIM_X = DIM_X;
 	    this.DIM_Y = DIM_Y;
 	    this.mols = [];
-	
-	    while (this.mols.length < NUM_WATER_MOLECULES) {
-	      var newWaterMol = this.addWater();
-	      for (var i = 0; i < this.mols.length - 1; i++) {
-	        if (newWaterMol.isCollidedWith(this.mols[i])) {
-	          this.mols.pop();
-	        }
-	      }
+	    for (var i = 0; i < NUM_WATER_MOLECULES; i++) {
+	      this.addWater();
 	    }
 	  }
 	
@@ -470,8 +464,8 @@
 	      color1 = [parseInt(color1[0] + color1[1], 16), parseInt(color1[2] + color1[3], 16), parseInt(color1[4] + color1[5], 16)];
 	      color2 = [parseInt(color2[0] + color2[1], 16), parseInt(color2[2] + color2[3], 16), parseInt(color2[4] + color2[5], 16)];
 	      var color3 = [0.5 * color1[0] + 0.5 * color2[0], 0.5 * color1[1] + 0.5 * color2[1], 0.5 * color1[2] + 0.5 * color2[2]];
-	      var color4 = [0.75 * color1[0] + 0.25 * color2[0], 0.75 * color1[1] + 0.25 * color2[1], 0.75 * color1[2] + 0.25 * color2[2]];
-	      var color5 = [0.25 * color1[0] + 0.75 * color2[0], 0.25 * color1[1] + 0.75 * color2[1], 0.25 * color1[2] + 0.75 * color2[2]];
+	      var color4 = [0.8 * color1[0] + 0.2 * color2[0], 0.8 * color1[1] + 0.2 * color2[1], 0.8 * color1[2] + 0.2 * color2[2]];
+	      var color5 = [0.2 * color1[0] + 0.8 * color2[0], 0.2 * color1[1] + 0.8 * color2[1], 0.2 * color1[2] + 0.8 * color2[2]];
 	
 	      color3 = '#' + this.int_to_hex(color3[0]) + this.int_to_hex(color3[1]) + this.int_to_hex(color3[2]);
 	      color4 = '#' + this.int_to_hex(color4[0]) + this.int_to_hex(color4[1]) + this.int_to_hex(color4[2]);
