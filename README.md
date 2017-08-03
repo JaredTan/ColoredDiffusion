@@ -2,7 +2,7 @@
 
 [Link to Live Site](https://jaredtan.github.io/ColoredDiffusion/)
 
-Inspired by the entropy of nature, this quirky 2D Simulation written purely in vanilla JavaScript demonstrates the erratic motion a drop of food coloring undergoes when dispersed in a glass of water, while providing a delighting display of blended colors. :)
+Inspired by the entropy of nature, this quirky 2D simulation written purely in vanilla JavaScript demonstrates the erratic motion a drop of food coloring undergoes when dispersed in a glass of water, while providing a delighting display of blended colors. :)
 
 ![drop](http://res.cloudinary.com/jaredtan/image/upload/v1501744324/Screen_Shot_2017-08-03_at_12.06.37_AM_ymjnsf.png)
 
@@ -19,8 +19,8 @@ This motion (Brownian motion) can be summed up in 3 parts -
 
 ## Implementations
 
-Colored Diffusion emulates the nature of this motion through Momentum transfer and heat.
-### Conservation of Momentum
+Colored Diffusion emulates the nature of this motion through momentum transfer and heat.
+### Conservation of Momentum / Angled Collisions
 ```javascript
 handleElasticCollision(other) {
   let dx = this.pos[0] - other.pos[0];
@@ -43,11 +43,21 @@ handleElasticCollision(other) {
   other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI/2)*final_yvel_other;
   other.vel[1] = Math.sin(col_angle) * final_xvel_other + Math.sin(col_angle + Math.PI/2)*final_yvel_other;
 }
+
+const Util = {
+
+  elasticCollision(r1, r2, v1, v2) {
+    let mass1 = r1 * r1 * Math.PI;
+    let mass2 = r2 * r2 * Math.PI;
+    return (v1 * (mass1 - mass2) + (2 * mass2 * v2)) / (mass1 + mass2);
+  },
+  ...
+}
 ```
 
 
 ### Heat Change
-Temperature is by definition the average kinetic energy of the system, which can be represented by the velocity of the systems' molecules. The velocity of the molecules are incremented proportionally as the user changes the temperature setting.
+Temperature is by definition the average kinetic energy of the system, which can be represented by the velocity of the system's molecules. The velocity of the molecules are incremented proportionally as the user changes the temperature setting.
 
 ```javascript
 handleTempChange(newTemp) {
