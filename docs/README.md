@@ -10,11 +10,7 @@ This motion can be summed up in 3 parts -
 
 + 1) Diffusion / Mass Transfer: Defined by Fick's Law, where the rate of motion (J, or flux) is proportional to the concentration difference and inversely proportional to the distance needed to travel.
 
-<!-- ![Fick's Law](http://res.cloudinary.com/jaredtan/image/upload/v1501481918/ficks_law_2_wdsqr6.png) -->
-
 + 2) Heat Transfer: Defined by Fourier's Law, where heat moves down a temperature gradient, and the heat flux (q) is proportional to the thermal conductivity of the solutes.
-
-<!-- ![Fourier's Law](http://res.cloudinary.com/jaredtan/image/upload/v1501481917/fouriers_law_n8ogob.png) -->
 
 + 3) Momentum Transfer: Defined by Newton's Law, a fluid can be considered a distribution of matter. Similar to a ball bouncing off another, momentum must be conserved when other particles collide with it.
 
@@ -26,19 +22,21 @@ This simulation will allow a user to change different variables in this environm
 
 These variables will be:
 
-- [ ] Temperature (Average energy of the water)
+- [x] Temperature (Average energy of the water)
 
 - [ ] Size Ratio between the coloring and water
 
 - [ ] Mass Ratio between the coloring and water
 
+*Update - focused more on colors than motion*
+
 Also, to accompany the simulation, there will also be
 
 - [ ] Instructions
 
-- [ ] Short description of processes occurring.
+- [x] Short description of processes occurring.
 
-- [ ] Production README
+- [x] Production README
 
 ## Wireframe
 
@@ -76,7 +74,7 @@ Easel JS will be used to render high performance 2D graphics.
 
 ## Bonus
 
-- [ ] Allow multiple drops of coloring
+- [x] Allow multiple drops of coloring
 
 - [ ] Add solvent effects - such as using other solvents than water such as oil or soap.
 

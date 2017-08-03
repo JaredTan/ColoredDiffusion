@@ -121,11 +121,6 @@
 	      this.simulation.checkCollisions();
 	    }
 	  }, {
-	    key: "addDrop",
-	    value: function addDrop() {
-	      this.simulation.addDrop();
-	    }
-	  }, {
 	    key: "addDropEvent",
 	    value: function addDropEvent(e) {
 	      this.simulation.addDropEvent(e);
@@ -214,11 +209,6 @@
 	        this.mols.push(newDrop);
 	      }
 	    }
-	
-	    // Temp ~ K.E. KE = 1/2 * m * v^2
-	    // v^2 = 2KE/m
-	    // v = sqrt2KE/m
-	
 	  }, {
 	    key: 'handleTempChange',
 	    value: function handleTempChange(newTemp) {
@@ -448,7 +438,6 @@
 	      this.vel[1] = Math.sin(col_angle) * final_xvel_this + Math.sin(col_angle + Math.PI / 2) * final_yvel_this;
 	      other.vel[0] = Math.cos(col_angle) * final_xvel_other + Math.cos(col_angle + Math.PI / 2) * final_yvel_other;
 	      other.vel[1] = Math.sin(col_angle) * final_xvel_other + Math.sin(col_angle + Math.PI / 2) * final_yvel_other;
-	      ;
 	    }
 	  }, {
 	    key: 'separateObjects',
