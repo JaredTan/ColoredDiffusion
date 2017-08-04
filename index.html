@@ -17,17 +17,17 @@
         <a href="https://www.linkedin.com/in/jared-e-tan/">
           <i class="fa fa-linkedin-square fa-2x"></i>
         </a>
-        <div id="click-message">
-          <h4>Click anywhere on the screen</h4>
-          <h4>And wait...</h4>
+        <div id="click-message" class='click-message'>
+          <h4>Click anywhere on the screen and wait...</h4>
         </div>
+        <h4 id="click-message-two" display='none'>Make sure to choose different colors!</h4>
       </div>
     </div>
     <div class='right-header'>
       <div class="buttons">
         <div class="temp-bar-color">
           <div class="temp-bar">
-            <span id="range">Temp: 10°C</span>
+            <span id="range">Temp (Avg. Velocity): 10°C</span>
             <input type="range" min="10" max="60" value="10" step="5"
             onchange="showValue(this.value)" id='range-bar'/>
           </div>
@@ -53,7 +53,7 @@
     </div>
     <html>
     <script type="text/javascript">
-    const showValue = (newValue) => document.getElementById("range").innerHTML=`Temp: ${newValue}°C`;
+    const showValue = (newValue) => document.getElementById("range").innerHTML=`Temp (Avg. Velocity): ${newValue}°C`;
     </script>
     <link rel="stylesheet" type = "text/css" href = "./colored_diffusion.css" />
     <canvas id="canvas"></canvas>

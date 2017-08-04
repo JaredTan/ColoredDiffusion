@@ -77,7 +77,8 @@
 	  canvas.addEventListener('click', function (e) {
 	    return simView.addDropEvent(e);
 	  }, false);
-	  $('#click-message').fadeIn().delay(3000).fadeOut();
+	  $('#click-message').delay(2000).fadeOut();
+	  $('#click-message-two').delay(3000).fadeOut();
 	});
 
 /***/ }),
@@ -526,7 +527,7 @@
 	  return 8;
 	};
 	
-	var VELOCITY = 3;
+	var VELOCITY = 2;
 	
 	var screenWidth = document.documentElement.clientWidth;
 	
