@@ -200,7 +200,7 @@
 	        numDrops = 0;
 	      }
 	      for (var i = 0; i < numDrops; i++) {
-	        var newDrop = new _color_drop_mol2.default({ pos: [e.clientX, e.clientY] });
+	        var newDrop = new _color_drop_mol2.default({ pos: [e.clientX + 50 * (0.5 * Math.random()), e.clientY + 50 * (0.5 * Math.random())] });
 	        this.mols.push(newDrop);
 	      }
 	    }
