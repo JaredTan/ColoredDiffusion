@@ -177,6 +177,7 @@
 	
 	    this.DIM_X = DIM_X;
 	    this.DIM_Y = DIM_Y;
+	    this.NUM_WATER_MOLECULES = NUM_WATER_MOLECULES;
 	    this.mols = [];
 	    for (var i = 0; i < NUM_WATER_MOLECULES; i++) {
 	      this.addWater();
@@ -194,10 +195,13 @@
 	    key: 'addDropEvent',
 	    value: function addDropEvent(e) {
 	      var numDrops = document.getElementById('drop-count').value;
-	      if (numDrops > 500) {
-	        numDrops = 500;
+	      if (numDrops > 250) {
+	        numDrops = 250;
 	      } else if (numDrops < 0) {
 	        numDrops = 0;
+	      }
+	      if (this.mols.length > 1500) {
+	        this.mols.splice(this.NUM_WATER_MOLECULES, numDrops);
 	      }
 	      for (var i = 0; i < numDrops; i++) {
 	        var newDrop = new _color_drop_mol2.default({ pos: [e.clientX + 50 * (0.5 * Math.random()), e.clientY + 50 * (0.5 * Math.random())] });
