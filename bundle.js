@@ -201,7 +201,9 @@
 	        numDrops = 0;
 	      }
 	      if (this.mols.length > 1500) {
-	        this.mols.splice(this.NUM_WATER_MOLECULES, numDrops);
+	        for (var j = this.mols.length - 1 - this.NUM_WATER_MOLECULES; j >= 1500; j--) {
+	          this.mols.splice(this.NUM_WATER_MOLECULES + Math.floor(Math.random() * this.mols.length), 1);
+	        }
 	      }
 	      for (var i = 0; i < numDrops; i++) {
 	        var newDrop = new _color_drop_mol2.default({ pos: [e.clientX + 50 * (0.5 * Math.random()), e.clientY + 50 * (0.5 * Math.random())] });
