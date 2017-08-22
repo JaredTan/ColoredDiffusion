@@ -1,6 +1,6 @@
 # Colored Diffusion
 
-[Link to Live Site](www.coloreddiffusion.com)
+[Link to Live Site](http://www.coloreddiffusion.com)
 
 Inspired by the entropy of nature, this quirky 2D simulation written purely in vanilla JavaScript demonstrates the erratic motion a drop of food coloring undergoes when dispersed in a glass of water, while providing a delighting display of blended colors. :)
 
