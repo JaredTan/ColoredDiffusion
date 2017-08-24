@@ -171,7 +171,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 200;
+	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
 	
 	    _classCallCheck(this, Sim);
 	
