@@ -1,3 +1,16 @@
+html, body, h1, a, button, i, div, h2, input, span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  color: inherit;
+  text-decoration: inherit;
+  vertical-align: inherit;
+  box-sizing: inherit;
+  background: transparent;
+  font-family: 'Comfortaa', cursive;
+}
+
 .left-header {
   position: fixed;
   left: 40px;
@@ -123,22 +136,6 @@
 .small-btn:hover {
   background: #DECBC6;
 }
-
-
-
-html, body, h1, a, button, i, div, h2, input, span {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  color: inherit;
-  text-decoration: inherit;
-  vertical-align: inherit;
-  box-sizing: inherit;
-  background: transparent;
-  font-family: 'Comfortaa', cursive;
-}
-
 
 .color-choice {
   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
