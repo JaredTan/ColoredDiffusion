@@ -171,7 +171,7 @@
 	  function Sim() {
 	    var DIM_X = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1000;
 	    var DIM_Y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1000;
-	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 500;
+	    var NUM_WATER_MOLECULES = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
 	
 	    _classCallCheck(this, Sim);
 	
@@ -478,7 +478,7 @@
 	      color4 = '#' + this.int_to_hex(color4[0]) + this.int_to_hex(color4[1]) + this.int_to_hex(color4[2]);
 	      color5 = '#' + this.int_to_hex(color5[0]) + this.int_to_hex(color5[1]) + this.int_to_hex(color5[2]);
 	
-	      if (this.radius < other.radius) {
+	      if (this.radius > other.radius) {
 	        this.color = color4;
 	        other.color = color5;
 	      } else if (this.radius == other.radius) {

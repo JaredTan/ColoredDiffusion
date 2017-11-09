@@ -6,16 +6,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-.right-header {
-  position: fixed;
-  right: 40px;
-  top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid rgba(112, 1, 39, .4);
+  border-radius: 20px;
+  background-color: rgba(112, 1, 39);
+  padding:5px;
 }
 
 .subtitle {
@@ -44,6 +38,7 @@
 .color-choice {
   text-transform: none;
   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
+  margin-top:15px;
    height: 29px;
    overflow: hidden;
    width: 240px;
@@ -75,14 +70,8 @@
   height: 200px;
   top: 57%;
   left: 50%;
-  margin-top: -100px;
-  margin-left: -150px;
-}
-
-.temp-bar-color {
-  display:flex;
-  flex-direction: row;
-  align-items: baseline;
+  margin-top: -100px; /* Negative half of height. */
+  margin-left: -150px; /* Negative half of width. */
 }
 
 .temp-bar {
@@ -114,27 +103,6 @@
   align-items: center;
 }
 
-#drop-btn {
-  margin-right: 10px;
-}
-
-.btn {
-  font-size: 30px;
-  padding: 5px;
-  vertical-align: middle;
-  margin-top: 10px;
-  border: 1px solid #9e9e9e;
-  border-radius: 25px;
-  cursor: pointer;
-  color: #800000;
-  background-color: #53d0ea;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn:hover {
-  background: #2cafc9;
-}
-
 .small-buttons {
   display: flex;
   align-items: center;
@@ -158,11 +126,7 @@
 
 
 
-html, body, header, nav, h1, a,
-ul, li, strong, main, button, i,
-section, img, div, h2, p, form,
-fieldset, label, input, textarea,
-span, article, footer, time, small {
+html, body, h1, a, button, i, div, h2, input, span {
   margin: 0;
   padding: 0;
   border: 0;
@@ -198,28 +162,3 @@ span, article, footer, time, small {
   padding: 5px;
   font-size: 12px;
 }
-.styled-select {
-   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0;
-   height: 29px;
-   overflow: hidden;
-   width: 240px;
-}
-
-.styled-select select {
-   background: transparent;
-   border: none;
-   font-size: 14px;
-   height: 29px;
-   padding: 5px;
-   width: 268px;
-}
-
-.rounded {
-   -webkit-border-radius: 20px;
-   -moz-border-radius: 20px;
-   border-radius: 20px;
-}
-
-.blue    { background-color: #3b8ec2; }
-
-.blue select    { color: #fff; }
